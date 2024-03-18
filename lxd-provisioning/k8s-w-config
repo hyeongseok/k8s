@@ -1,0 +1,26 @@
+config:
+  limits.cpu: "8"
+  limits.memory: 8GB
+  limits.memory.swap: "false"
+  linux.kernel_modules: ip_tables,ip6_tables,netlink_diag,nf_nat,overlay
+  raw.lxc: "lxc.apparmor.profile=unconfined\nlxc.cap.drop= \nlxc.cgroup.devices.allow=a\nlxc.mount.auto=proc:rw
+    sys:rw"
+  security.nesting: "true"
+  security.privileged: "true"
+description: Profile for Kubernetes Worker
+devices:
+  eth0:
+    name: eth0
+    nictype: bridged
+    parent: lxdbr0
+    type: nic
+  kmsg:
+    path: /dev/kmsg
+    source: /dev/kmsg
+    type: unix-char    
+  root:
+    path: /
+    pool: data
+    type: disk
+name: k8s-w
+used_by: []
